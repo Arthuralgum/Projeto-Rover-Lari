@@ -33,6 +33,8 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   Serial.println(package.btn_1);
   Serial.print("btn_2: ");
   Serial.println(package.btn_2);
+  // precisa fazer a suavisacao dos valores do joysyick pro motores
+  
   delay(100);
 }
 
