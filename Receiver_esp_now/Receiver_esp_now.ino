@@ -29,11 +29,10 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   Serial.println(package.joyX);
   Serial.print("Y: ");
   Serial.println(package.joyY);
-  if (package.joyX> 200){
-    Serial.println("High");
-  } else{ 
-    Serial.println("Low");
-    }
+  Serial.print("btn_1: ");
+  Serial.println(package.btn_1);
+  Serial.print("btn_2: ");
+  Serial.println(package.btn_2);
   delay(100);
 }
 
