@@ -3,10 +3,10 @@
 #include <esp_now.h>
 
 
-const uint8_t motor1e = 18; // RX2 Pin
-const uint8_t motor1d = 17; // TX2 Pin
-const uint8_t motor2e = 21; // D18 Pin
-const uint8_t motor2d = 19; // D19 Pin
+const uint8_t m1frente = 18; // RX2 Pin
+const uint8_t m1tras = 17; // TX2 Pin
+const uint8_t m2tras = 21; // D18 Pin
+const uint8_t m2frente = 19; // D19 Pin
 
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
@@ -33,25 +33,36 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   Serial.println(package.btn_1);
   Serial.print("btn_2: ");
   Serial.println(package.btn_2);
-  if (package.joyX > 127 && package.joyY > 127){
-      analogWrite(motor1e, package.joyX);
-      analogWrite(motor2e, package.joyY);
-      analogWrite(motor1d, 0);
-      analogWrite(motor2d, 0);
+  if (package.joyX < 127 && package.joyY > 127){ //frente esquerda
+      analogWrite(m1frente, package.joyX);
+      analogWrite(m2tras, package.joyY);
+      analogWrite(m1tras, 0);
+      analogWrite(m2frente, 0);
 
-  }else 
-  if (package.joyX < 127 && package.joyY < 127){
-      analogWrite(motor1e, 0);
-      analogWrite(motor2e, 0);
-      analogWrite(motor1d, 255-package.joyX);
-      analogWrite(motor2d, 225-package.joyY);
+  }else if (package.joyX > 127 && package.joyY > 127){ //frente direita 
+      analogWrite(m1frente, 0);
+      analogWrite(m2tras, 0);
+      analogWrite(m1tras, 255-package.joyX);
+      analogWrite(m2frente, 225-package.joyY);
+
+  }else if (package.joyX < 127 && package.joyY < 127){ //tras esquerda
+      analogWrite(m1frente, 0);
+      analogWrite(m2tras, 0);
+      analogWrite(m1tras, 255-package.joyX);
+      analogWrite(m2frente, 225-package.joyY);
+
+  }else if (package.joyX < 127 && package.joyY < 127){ //tras direita
+      analogWrite(m1frente, 0);
+      analogWrite(m2tras, 0);
+      analogWrite(m1tras, 255-package.joyX);
+      analogWrite(m2frente, 225-package.joyY);
 
   }
   else {
-      analogWrite(motor1e, 0);
-      analogWrite(motor2e, 0);
-      analogWrite(motor1d, 0);
-      analogWrite(motor2d, 0);
+      analogWrite(m1frente, 0);
+      analogWrite(m2tras, 0);
+      analogWrite(m1tras, 0);
+      analogWrite(m2frente, 0);
     
   }
   delay(100);
@@ -59,10 +70,10 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
 void setup() {
   Serial.begin(115200);
-  pinMode(motor1e, OUTPUT);
-  pinMode(motor1d, OUTPUT);
-  pinMode(motor2e, OUTPUT);
-  pinMode(motor2d, OUTPUT);
+  pinMode(m1frente, OUTPUT);
+  pinMode(m1tras, OUTPUT);
+  pinMode(m2tras, OUTPUT);
+  pinMode(m2frente, OUTPUT);
   WiFi.mode(WIFI_STA);
 
   if (esp_now_init() != ESP_OK) {
