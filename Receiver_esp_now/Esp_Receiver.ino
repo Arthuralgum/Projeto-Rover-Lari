@@ -12,7 +12,7 @@ const uint8_t m2frente = 19; // D19 Pin - int4
 const uint8_t pinoENA = 25; 
 const uint8_t pinoENB = 26;
 
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // tem q trocar pro mac address do controle
 
 typedef struct controller_package {
   uint8_t joyX;
