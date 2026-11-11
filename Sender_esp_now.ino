@@ -9,7 +9,7 @@ const int JoystickBtn = -1;
 const int JoystickX = 32;
 const int JoystickY = 33;
 
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}; // tem q trocar pro mac address do esp no rover
 
 typedef struct controller_package {
   uint8_t joyX;
