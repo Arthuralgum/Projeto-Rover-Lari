@@ -60,13 +60,9 @@ void setup() {
 }
 
 void handleJoystickAxis(uint16_t inputX, uint16_t inputY){
-  //input - 4095
-  //x - 255
-
-  // uint8_t rX = inputX*255/4095;
-  // uint8_t rY = inputY*255/4095;
-  uint8_t rX = map(inputX, 0, 4150, 0, 255);
-  uint8_t rY = map(inputY, 0, 4150, 0, 255);
+  
+  uint8_t rX = map(inputX, 0, 4150, -255, 255);
+  uint8_t rY = map(inputY, 0, 4150, -255, 255);
   if(rX > 115 && rX < 130){
     rX = 127;
   }
