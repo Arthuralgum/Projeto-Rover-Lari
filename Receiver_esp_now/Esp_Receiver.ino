@@ -65,9 +65,6 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   Serial.println(package.btn_2);
   
 
-    int inputY = map(package.joyY, 0, 255, -255, 255); // Forward (+) / Backward (-)
-  int inputX = map(package.joyX, 0, 255, -255, 255); // Right (+) / Left (-)
-
   if (abs(inputY) < 20) inputY = 0;
   if (abs(inputX) < 20) inputX = 0;
 
